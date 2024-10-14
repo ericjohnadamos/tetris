@@ -9,6 +9,7 @@ public:
 	void Initialize();
 	void Print() const;
 	void Draw() const;
+	bool IsCellOutside(int r, int c) const;
 	int grid[20][10];
 
 private:
