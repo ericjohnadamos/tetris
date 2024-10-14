@@ -22,8 +22,35 @@ std::vector<Block> Game::GetAllBlocks() {
 	return { IBlock(), JBlock(), LBlock(), OBlock(), SBlock(), TBlock(), ZBlock()};
 }
 
+void Game::HandleInput() {
+	int keyPressed = GetKeyPressed();
+	switch (keyPressed)
+	{
+	case KEY_LEFT:
+		MoveBlockLeft();
+		break;
+	case KEY_RIGHT:
+		MoveBlockRight();
+		break;
+	case KEY_DOWN:
+		MoveBlockDown();
+		break;
+	}
+}
+
 void Game::Draw() {
 	grid.Draw();
 	_currentBlock.Draw();
 }
 
+void Game::MoveBlockLeft() {
+	_currentBlock.Move(0, -1);
+}
+
+void Game::MoveBlockRight() {
+	_currentBlock.Move(0, 1);
+}
+
+void Game::MoveBlockDown() {
+	_currentBlock.Move(1, 0);
+}
