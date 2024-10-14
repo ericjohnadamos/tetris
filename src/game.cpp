@@ -14,10 +14,16 @@ Block Game::GetRandomBlock() {
 
 	int randIndex = rand() % _blocks.size();
 	Block block = _blocks[randIndex];
-	_blocks.erase(_blocks.begin() + randomIndex);
+	_blocks.erase(_blocks.begin() + randIndex);
 	return block;
 }
 
 std::vector<Block> Game::GetAllBlocks() {
-	return { IBlock, JBlock(), LBlock(), OBlock(), SBlock(), TBlock(), ZBlock() };
+	return { IBlock(), JBlock(), LBlock(), OBlock(), SBlock(), TBlock(), ZBlock()};
 }
+
+void Game::Draw() {
+	grid.Draw();
+	_currentBlock.Draw();
+}
+

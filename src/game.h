@@ -8,6 +8,7 @@ public:
 	Game();
 	Block GetRandomBlock();
 	std::vector<Block> GetAllBlocks();
+	void Draw();
 	Grid grid;
 
 private:
