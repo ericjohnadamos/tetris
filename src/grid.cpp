@@ -42,3 +42,37 @@ bool Grid::IsCellOutside(int r, int c) const
 bool Grid::IsCellEmpty(int r, int c) const {
 	return grid[r][c] == 0;
 }
+
+int Grid::ClearFullRows() {
+	int completed = 0;
+	for (int r = _numRows - 1; r >= 0; --r) {
+		if (IsRowFull(r)) {
+			ClearRow(r);
+			++completed;
+		}
+		else if (completed > 0)
+		{
+			MoveRowDown(r, completed);
+		}
+	}
+	return completed;
+}
+
+bool Grid::IsRowFull(int r) const {
+	for (int c = 0; c < _numCols; ++c)
+		if (grid[r][c] == 0)
+			return false;
+	return true;
+}
+
+void Grid::ClearRow(int r) {
+	for (int c = 0; c < _numCols; ++c)
+		grid[r][c] = 0;
+}
+
+void Grid::MoveRowDown(int r, int numRows) {
+	for (int c = 0; c < _numCols; ++c) {
+		grid[r + numRows][c] = grid[r][c];
+		grid[r][c] = 0;
+	}
+}

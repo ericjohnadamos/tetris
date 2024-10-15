@@ -27,7 +27,9 @@ void Block::Move(int r, int c) {
 }
 
 void Block::Rotate() {
-	_rotationState = (_rotationState + 1) % 4;
+	++_rotationState;
+	if (_rotationState == cells.size())
+		_rotationState = 0;
 }
 
 void Block::UndoRotate() {
