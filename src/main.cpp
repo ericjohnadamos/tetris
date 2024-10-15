@@ -2,6 +2,17 @@
 #include <raylib.h>
 #include "game.h"
 
+double lastUpdatedTime = 0;
+
+static bool EventTriggered(double interval) {
+	double currentTime = GetTime();
+	if (currentTime - lastUpdatedTime >= interval) {
+		lastUpdatedTime = currentTime;
+		return true;
+	}
+	return false;
+}
+
 int main()
 {
 	const int screenWidth = 900;
@@ -15,6 +26,8 @@ int main()
 	while (!WindowShouldClose())
 	{
 		game.HandleInput();
+		if (EventTriggered(0.2))
+			game.MoveBlockDown();
 		BeginDrawing();
 		ClearBackground(BLACK);
 		game.Draw();
@@ -22,5 +35,4 @@ int main()
 	}
 
 	CloseWindow();
-	return 0;
 }
