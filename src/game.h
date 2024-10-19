@@ -21,6 +21,7 @@ private:
 	void RotateBlock();
 	void LockBlock();
 	bool BlockFits();
+	void Reset();
 	std::vector<Block> _blocks;
 	Block _currentBlock;
 	Block _nextBlock;

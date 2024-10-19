@@ -25,6 +25,10 @@ std::vector<Block> Game::GetAllBlocks() {
 
 void Game::HandleInput() {
 	int keyPressed = GetKeyPressed();
+	if (gameOver && keyPressed != 0) {
+		gameOver = false;
+		Reset();
+	}
 	switch (keyPressed)
 	{
 	case KEY_LEFT:
@@ -109,5 +113,12 @@ bool Game::BlockFits() {
 		if (!grid.IsCellEmpty(tile.row, tile.column))
 			return false;
 	return true;
+}
+
+void Game::Reset() {
+	grid.Initialize();
+	_blocks = GetAllBlocks();
+	_currentBlock = GetRandomBlock();
+	_nextBlock = GetRandomBlock();
 }
 
