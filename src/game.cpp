@@ -6,6 +6,7 @@ Game::Game() {
 	_blocks = GetAllBlocks();
 	_currentBlock = GetRandomBlock();
 	_nextBlock = GetRandomBlock();
+	gameOver = false;
 }
 
 Block Game::GetRandomBlock() {
@@ -47,18 +48,24 @@ void Game::Draw() {
 }
 
 void Game::MoveBlockLeft() {
+	if (gameOver)
+		return;
 	_currentBlock.Move(0, -1);
 	if (IsBlockOutside() || !BlockFits())
 		_currentBlock.Move(0, 1);
 }
 
 void Game::MoveBlockRight() {
+	if (gameOver)
+		return;
 	_currentBlock.Move(0, 1);
 	if (IsBlockOutside() || !BlockFits())
 		_currentBlock.Move(0, -1);
 }
 
 void Game::MoveBlockDown() {
+	if (gameOver)
+		return;
 	_currentBlock.Move(1, 0);
 	if (IsBlockOutside() || !BlockFits()) {
 		_currentBlock.Move(-1, 0);
@@ -67,6 +74,8 @@ void Game::MoveBlockDown() {
 }
 
 void Game::RotateBlock() {
+	if (gameOver)
+		return;
 	_currentBlock.Rotate();
 	if (IsBlockOutside() || !BlockFits())
 		_currentBlock.UndoRotate();
@@ -85,6 +94,11 @@ void Game::LockBlock() {
 	for (Position tile : tiles)
 		grid.grid[tile.row][tile.column] = _currentBlock.id;
 	_currentBlock = _nextBlock;
+
+	if (!BlockFits()) {
+		gameOver = true;
+	}
+
 	_nextBlock = GetRandomBlock();
 	grid.ClearFullRows();
 }
