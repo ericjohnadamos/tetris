@@ -32,7 +32,7 @@ int main()
 			game.MoveBlockDown();
 		BeginDrawing();
 		ClearBackground(BLACK);
-		DrawTextEx(font, "Score", { 365, 50 }, 380, 2, GREEN);
+		DrawTextEx(font, "Score", { 1000, 50 }, 64, 2, GREEN);
 		game.Draw();
 		EndDrawing();
 	}
