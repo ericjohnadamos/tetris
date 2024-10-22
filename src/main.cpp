@@ -1,6 +1,7 @@
 #include <iostream>
 #include <raylib.h>
 #include "game.h"
+#include "colors.h"
 
 double lastUpdatedTime = 0;
 
@@ -33,6 +34,7 @@ int main()
 		BeginDrawing();
 		ClearBackground(BLACK);
 		DrawTextEx(font, "Score", { 1000, 50 }, 64, 2, GREEN);
+		DrawRectangleRounded({ 1000, 110, 170, 60 }, 0.3, 6, lightBlue);
 		game.Draw();
 		EndDrawing();
 	}
