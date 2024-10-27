@@ -18,6 +18,7 @@ int main()
 {
 	const int screenWidth = 1500;
 	const int screenHeight = 1800;
+	const int xMargin = 100;
 
 	Font font = LoadFontEx("Super Kloud.ttf", 64, 0, 0);
 
@@ -33,9 +34,17 @@ int main()
 			game.MoveBlockDown();
 		BeginDrawing();
 		ClearBackground(BLACK);
-		DrawTextEx(font, "Score", { 1000, 50 }, 64, 2, GREEN);
-		DrawTextEx(font, "Next", { 1000, 300 }, 64, 2, GREEN);
-		DrawRectangleRounded({ 1000, 110, 240, 120 }, 0.3, 6, lightBlue);
+
+		const float scoreTextWidth = MeasureText("SCORE", 128);
+		DrawTextEx(font, "SCORE", { 900 + (scoreTextWidth / 4), 100 }, 128, 2, GREEN);
+		DrawRectangleRounded({ 900 + xMargin, 256, 600 - (xMargin * 2), 128}, 0.3, 6, lightBlue);
+
+		const float nextTextWidth = MeasureText("NEXT", 128);
+		DrawTextEx(font, "NEXT", { 900 + (nextTextWidth / 3), 384 + xMargin}, 128, 2, GREEN);
+		DrawRectangleRounded({ 900 + xMargin, 640, 600 - (xMargin * 2), 256}, 0.3, 6, lightBlue);
+
+		if (game.gameOver)
+			DrawTextEx(font, "GAME OVER", { 1000, 450 }, 64, 2, GREEN);
 		game.Draw();
 		EndDrawing();
 	}
