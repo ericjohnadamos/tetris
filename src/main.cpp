@@ -2,6 +2,7 @@
 #include <raylib.h>
 #include "game.h"
 #include "colors.h"
+#include <iostream>
 
 double lastUpdatedTime = 0;
 
@@ -20,7 +21,8 @@ int main()
 	const int screenHeight = 1800;
 	const int xMargin = 100;
 
-	Font font = LoadFontEx("Super Kloud.ttf", 64, 0, 0);
+	const Font font = LoadFontEx("Super Kloud.ttf", 64, 0, 0);
+	const float fontSize = 128;
 
 	InitWindow(screenWidth, screenHeight, "Tetris Game");
 	SetTargetFPS(60);
@@ -35,11 +37,17 @@ int main()
 		BeginDrawing();
 		ClearBackground(BLACK);
 
-		// Todo: Fix the calculations when you have time
+		// #ToDo: Cleanup calculations
+
 		const float scoreTextWidth = MeasureText("SCORE", 128);
 		DrawTextEx(font, "SCORE", { 900 + (scoreTextWidth / 4), 100 }, 128, 2, GREEN);
 		const Rectangle scoreRect = { 900 + xMargin, 256, 600 - (xMargin * 2), 128 };
 		DrawRectangleRounded(scoreRect, 0.3, 6, lightBlue);
+
+		char scoreText[10];
+		sprintf_s(scoreText, "%d", game.score);
+		Vector2 scoreTextSize = MeasureTextEx(font, scoreText, fontSize, 2);
+		DrawTextEx(font, scoreText, { 900 + (384 - scoreTextSize.x) / 2, scoreRect.y }, fontSize, 2, WHITE);
 
 		const float nextTextWidth = MeasureText("NEXT", 128);
 		DrawTextEx(font, "NEXT", { 900 + (nextTextWidth / 3), 384 + xMargin}, 128, 2, GREEN);
