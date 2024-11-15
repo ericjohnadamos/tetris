@@ -35,16 +35,20 @@ int main()
 		BeginDrawing();
 		ClearBackground(BLACK);
 
+		// Todo: Fix the calculations when you have time
 		const float scoreTextWidth = MeasureText("SCORE", 128);
 		DrawTextEx(font, "SCORE", { 900 + (scoreTextWidth / 4), 100 }, 128, 2, GREEN);
-		DrawRectangleRounded({ 900 + xMargin, 256, 600 - (xMargin * 2), 128}, 0.3, 6, lightBlue);
+		const Rectangle scoreRect = { 900 + xMargin, 256, 600 - (xMargin * 2), 128 };
+		DrawRectangleRounded(scoreRect, 0.3, 6, lightBlue);
 
 		const float nextTextWidth = MeasureText("NEXT", 128);
 		DrawTextEx(font, "NEXT", { 900 + (nextTextWidth / 3), 384 + xMargin}, 128, 2, GREEN);
-		DrawRectangleRounded({ 900 + xMargin, 640, 600 - (xMargin * 2), 256}, 0.3, 6, lightBlue);
+		const Rectangle nextRect = { scoreRect.x, scoreRect.y + 380, scoreRect.width, scoreRect.height + 128 };
+		DrawRectangleRounded(nextRect, 0.3, 6, lightBlue);
 
 		if (game.gameOver)
-			DrawTextEx(font, "GAME OVER", { 1000, 450 }, 64, 2, GREEN);
+			DrawTextEx(font, "GAME OVER", { nextRect.x, scoreRect.y + scoreRect.height + 720 }, 64, 2, GREEN);
+
 		game.Draw();
 		EndDrawing();
 	}
