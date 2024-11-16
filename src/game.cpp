@@ -50,7 +50,8 @@ void Game::HandleInput() {
 
 void Game::Draw() {
 	grid.Draw();
-	_currentBlock.Draw();
+	_currentBlock.Draw(11, 11);
+	_nextBlock.Draw(750, 650);
 }
 
 void Game::MoveBlockLeft() {
