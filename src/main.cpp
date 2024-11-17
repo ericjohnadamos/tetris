@@ -3,12 +3,12 @@
 #include "game.h"
 #include "colors.h"
 
-double lastUpdatedTime = 0;
+double m_lastUpdatedTime = 0;
 
 static bool EventTriggered(double interval) {
-	double currentTime = GetTime();
-	if (currentTime - lastUpdatedTime >= interval) {
-		lastUpdatedTime = currentTime;
+	const double currentTime = GetTime();
+	if (currentTime - m_lastUpdatedTime >= interval) {
+		m_lastUpdatedTime = currentTime;
 		return true;
 	}
 	return false;
