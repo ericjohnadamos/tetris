@@ -1,11 +1,11 @@
 #include "block.h"
 
-Block::Block() {
-	_cellSize = 90;
-	_rotationState = 0;
-	colors = GetCellColors();
-	_rowOffset = 0;
-	_colOffset = 0;
+Block::Block()
+	: m_cellSize(90),
+	m_rotationState(0),
+	m_rowOffset(0),
+	m_colOffset(0),
+	m_colors(GetCellColors()) {
 }
 
 void Block::Draw(int offsetX, int offsetY)
@@ -13,36 +13,36 @@ void Block::Draw(int offsetX, int offsetY)
 	std::vector<Position> tiles = GetCellPositions();
 	for (Position tile : tiles) {
 		DrawRectangle(
-			tile.column * _cellSize + offsetX,
-			tile.row * _cellSize + offsetY,
-			_cellSize - 1,
-			_cellSize - 1,
-			colors[id]);
+			tile.column * m_cellSize + offsetX,
+			tile.row * m_cellSize + offsetY,
+			m_cellSize - 1,
+			m_cellSize - 1,
+			m_colors[id]);
 	}
 }
 
 void Block::Move(int r, int c) {
-	_rowOffset += r;
-	_colOffset += c;
+	m_rowOffset += r;
+	m_colOffset += c;
 }
 
 void Block::Rotate() {
-	++_rotationState;
-	if (_rotationState == cells.size())
-		_rotationState = 0;
+	++m_rotationState;
+	if (m_rotationState == cells.size())
+		m_rotationState = 0;
 }
 
 void Block::UndoRotate() {
-	--_rotationState;
-	if (_rotationState < 0)
-		_rotationState = 0;
+	--m_rotationState;
+	if (m_rotationState < 0)
+		m_rotationState = 0;
 }
 
 std::vector<Position> Block::GetCellPositions() {
-	std::vector<Position> tiles = cells[_rotationState];
+	std::vector<Position> tiles = cells[m_rotationState];
 	std::vector<Position> newTiles;
 	for (Position tile : tiles) {
-		Position newPosition = Position(tile.row + _rowOffset, tile.column + _colOffset);
+		Position newPosition = Position(tile.row + m_rowOffset, tile.column + m_colOffset);
 		newTiles.emplace_back(newPosition);
 	}
 	return newTiles;
