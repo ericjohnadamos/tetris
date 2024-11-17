@@ -2,7 +2,6 @@
 #include <raylib.h>
 #include "game.h"
 #include "colors.h"
-#include <iostream>
 
 double lastUpdatedTime = 0;
 
